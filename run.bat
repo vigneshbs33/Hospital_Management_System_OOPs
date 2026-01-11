@@ -6,37 +6,42 @@ echo.
 
 cd /d "%~dp0"
 
-:: Check if Java is installed
-where java >nul 2>nul
-if %ERRORLEVEL% NEQ 0 (
-    echo ERROR: Java is not installed or not in PATH!
-    echo Please install Java JDK and add it to your PATH.
-    echo Download from: https://www.oracle.com/java/technologies/downloads/
+:: Set Java path
+set JAVA_HOME=C:\Program Files\Java\jdk-23
+set JAVA_CMD=%JAVA_HOME%\bin\java
+set JAVAC_CMD=%JAVA_HOME%\bin\javac
+
+:: Check if Java exists
+if not exist "%JAVAC_CMD%.exe" (
+    set JAVA_HOME=C:\Program Files\Java\jdk-21
+    set JAVA_CMD=%JAVA_HOME%\bin\java
+    set JAVAC_CMD=%JAVA_HOME%\bin\javac
+)
+
+if not exist "%JAVAC_CMD%.exe" (
+    set JAVA_HOME=C:\Program Files\Java\jdk-17
+    set JAVA_CMD=%JAVA_HOME%\bin\java
+    set JAVAC_CMD=%JAVA_HOME%\bin\javac
+)
+
+if not exist "%JAVAC_CMD%.exe" (
+    echo ERROR: Java JDK not found!
     pause
     exit /b 1
 )
 
-:: Create output directory if not exists
+:: Create output directory
 if not exist "out" mkdir out
 
-echo Compiling Java files...
-javac -d out -sourcepath src src\Main.java src\models\*.java src\managers\*.java src\utils\*.java src\gui\*.java src\gui\components\*.java 2>&1
+echo Compiling...
+"%JAVAC_CMD%" -d out -sourcepath src src/Main.java src/models/*.java src/managers/*.java src/utils/*.java src/gui/*.java src/gui/components/*.java
 
 if %ERRORLEVEL% NEQ 0 (
-    echo.
     echo Compilation failed!
-    echo Make sure you have Java JDK installed (not just JRE).
     pause
     exit /b 1
 )
 
-echo Compilation successful!
-echo.
-echo ========================================
-echo  Starting Hospital Management System...
-echo ========================================
-echo.
-
-java -cp out Main
-
+echo Starting application...
+"%JAVA_CMD%" -cp out Main
 pause
