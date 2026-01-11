@@ -6,14 +6,26 @@ echo.
 
 cd /d "%~dp0"
 
+:: Check if Java is installed
+where java >nul 2>nul
+if %ERRORLEVEL% NEQ 0 (
+    echo ERROR: Java is not installed or not in PATH!
+    echo Please install Java JDK and add it to your PATH.
+    echo Download from: https://www.oracle.com/java/technologies/downloads/
+    pause
+    exit /b 1
+)
+
+:: Create output directory if not exists
 if not exist "out" mkdir out
 
 echo Compiling Java files...
-"C:\Program Files\Java\jdk-23\bin\javac" -d out -sourcepath src src\Main.java src\models\*.java src\managers\*.java src\utils\*.java src\gui\*.java src\gui\components\*.java
+javac -d out -sourcepath src src\Main.java src\models\*.java src\managers\*.java src\utils\*.java src\gui\*.java src\gui\components\*.java 2>&1
 
 if %ERRORLEVEL% NEQ 0 (
     echo.
-    echo Compilation failed! Please check if Java JDK is installed.
+    echo Compilation failed!
+    echo Make sure you have Java JDK installed (not just JRE).
     pause
     exit /b 1
 )
@@ -21,15 +33,10 @@ if %ERRORLEVEL% NEQ 0 (
 echo Compilation successful!
 echo.
 echo ========================================
-echo  Role-Based Access:
-echo  - Administrator: Full access
-echo  - Doctor: Dashboard, Patients, Appointments
-echo  - Receptionist: Dashboard, Patients, Appointments, Billing
+echo  Starting Hospital Management System...
 echo ========================================
 echo.
-echo Starting application...
-echo.
 
-"C:\Program Files\Java\jdk-23\bin\java" -cp out Main
+java -cp out Main
 
 pause
