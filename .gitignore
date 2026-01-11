@@ -1,0 +1,27 @@
+# Compiled class files
+out/
+*.class
+
+# Data files (user-specific)
+data/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Presentation files (keep private)
+COMPLETE_EXPLANATION.txt
+PRESENTATION_SCRIPT.txt
+CREDENTIALS.md

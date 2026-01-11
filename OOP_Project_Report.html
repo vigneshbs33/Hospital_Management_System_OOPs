@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital Management System - OOP Project Report</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.6; color: #000; background: #fff; }
+        .page { width: 210mm; min-height: 297mm; margin: 0 auto; padding: 25mm 20mm; background: white; page-break-after: always; }
+        .page:last-child { page-break-after: avoid; }
+        .center { text-align: center; }
+        .right { text-align: right; }
+        h1 { font-size: 24pt; margin-bottom: 20px; }
+        h2 { font-size: 16pt; margin: 25px 0 15px; border-bottom: 2px solid #000; padding-bottom: 5px; }
+        h3 { font-size: 14pt; margin: 20px 0 10px; }
+        p { margin: 10px 0; text-align: justify; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #000; padding: 8px 12px; text-align: left; }
+        th { background: #f0f0f0; font-weight: bold; }
+        .code-block { background: #f5f5f5; border: 1px solid #ddd; padding: 15px; font-family: 'Courier New', monospace; font-size: 10pt; margin: 15px 0; white-space: pre-wrap; overflow-x: auto; }
+        .screenshot { max-width: 100%; height: auto; border: 1px solid #ccc; margin: 15px 0; display: block; }
+        .caption { font-style: italic; text-align: center; margin-top: 5px; font-size: 10pt; }
+        ul, ol { margin: 10px 0 10px 30px; }
+        li { margin: 5px 0; }
+        .logo { width: 80px; height: auto; }
+        .title-page { display: flex; flex-direction: column; justify-content: space-between; min-height: 247mm; }
+        .team-table { width: 80%; margin: 20px auto; }
+        @media print {
+            .page { margin: 0; padding: 20mm; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Title Page -->
+<div class="page">
+    <div class="title-page">
+        <div class="center">
+            <img src="https://bit-bangalore.edu.in/wp-content/uploads/2023/02/BIT-Logo.png" alt="BIT Logo" style="width:100px;margin-bottom:20px;">
+            <h1 style="font-size:16pt;margin-bottom:5px;">BANGALORE INSTITUTE OF TECHNOLOGY</h1>
+            <p style="font-size:12pt;">(Affiliated to Visvesvaraya Technological University, Belagavi)</p>
+            <p style="font-size:12pt;">K.R. Road, V.V. Puram, Bangalore - 560004</p>
+            <hr style="margin:30px 0;border:1px solid #000;">
+            <h1 style="font-size:14pt;margin:20px 0;">DEPARTMENT OF INFORMATION SCIENCE AND ENGINEERING</h1>
+            <h1 style="font-size:18pt;margin:40px 0;">OBJECT ORIENTED PROGRAMMING WITH JAVA</h1>
+            <h1 style="font-size:14pt;">MINI PROJECT REPORT</h1>
+            <p style="font-size:12pt;margin-top:10px;">On</p>
+            <h1 style="font-size:20pt;margin:20px 0;color:#1a5f7a;">HOSPITAL MANAGEMENT SYSTEM</h1>
+        </div>
+        <div>
+            <h3 style="text-align:center;margin-bottom:20px;">Submitted By:</h3>
+            <table class="team-table">
+                <tr><th>Sl. No.</th><th>Name</th><th>USN</th></tr>
+                <tr><td>1</td><td>Vignesh B S</td><td>1BI24IS187</td></tr>
+                <tr><td>2</td><td>Rohit Maiya M</td><td>1BI24IS131</td></tr>
+                <tr><td>3</td><td>Shailesh Nayak</td><td>1BI24IS142</td></tr>
+                <tr><td>4</td><td>Shreenivas CS</td><td>1BI25IS414</td></tr>
+            </table>
+        </div>
+        <div class="center">
+            <p style="font-size:12pt;"><strong>Academic Year: 2024-2025</strong></p>
+        </div>
+    </div>
+</div>
+
+<!-- Table of Contents -->
+<div class="page">
+    <h2>TABLE OF CONTENTS</h2>
+    <table style="border:none;">
+        <tr style="border:none;"><td style="border:none;">1. Introduction</td><td style="border:none;text-align:right;">3</td></tr>
+        <tr style="border:none;"><td style="border:none;">2. Objectives</td><td style="border:none;text-align:right;">3</td></tr>
+        <tr style="border:none;"><td style="border:none;">3. System Requirements</td><td style="border:none;text-align:right;">4</td></tr>
+        <tr style="border:none;"><td style="border:none;">4. OOP Concepts Used</td><td style="border:none;text-align:right;">4</td></tr>
+        <tr style="border:none;"><td style="border:none;">5. System Design</td><td style="border:none;text-align:right;">5</td></tr>
+        <tr style="border:none;"><td style="border:none;">6. Implementation</td><td style="border:none;text-align:right;">6</td></tr>
+        <tr style="border:none;"><td style="border:none;">7. Screenshots</td><td style="border:none;text-align:right;">10</td></tr>
+        <tr style="border:none;"><td style="border:none;">8. Conclusion</td><td style="border:none;text-align:right;">15</td></tr>
+        <tr style="border:none;"><td style="border:none;">9. References</td><td style="border:none;text-align:right;">15</td></tr>
+    </table>
+</div>
+
+<!-- Introduction -->
+<div class="page">
+    <h2>1. INTRODUCTION</h2>
+    <p>The Hospital Management System is a comprehensive software application developed using Java programming language that demonstrates the practical implementation of Object-Oriented Programming (OOP) concepts. This system is designed to streamline and automate various hospital operations including patient management, doctor management, appointment scheduling, room allocation, and billing.</p>
+    <p>In today's digital era, efficient management of healthcare facilities is crucial for providing quality patient care. This project addresses the need for a centralized system that can handle multiple aspects of hospital administration through a user-friendly graphical interface built using Java Swing.</p>
+    <p>The application follows a modular architecture with clear separation of concerns, making it maintainable and scalable. It demonstrates core OOP principles including Abstraction, Inheritance, Encapsulation, and Polymorphism through well-structured class hierarchies.</p>
+
+    <h2>2. OBJECTIVES</h2>
+    <ul>
+        <li>To develop a complete Hospital Management System using Java</li>
+        <li>To demonstrate practical implementation of OOP concepts:
+            <ul>
+                <li>Abstraction through abstract classes</li>
+                <li>Inheritance through class hierarchies</li>
+                <li>Encapsulation through private fields and public methods</li>
+                <li>Polymorphism through method overriding</li>
+            </ul>
+        </li>
+        <li>To create a professional GUI using Java Swing</li>
+        <li>To implement data persistence using file handling</li>
+        <li>To provide modules for patient, doctor, appointment, room, and billing management</li>
+    </ul>
+</div>
+
+<!-- System Requirements -->
+<div class="page">
+    <h2>3. SYSTEM REQUIREMENTS</h2>
+    <h3>3.1 Hardware Requirements</h3>
+    <ul>
+        <li>Processor: Intel Core i3 or equivalent (minimum)</li>
+        <li>RAM: 4 GB (minimum), 8 GB (recommended)</li>
+        <li>Storage: 500 MB free disk space</li>
+        <li>Display: 1280 x 720 resolution (minimum)</li>
+    </ul>
+    <h3>3.2 Software Requirements</h3>
+    <ul>
+        <li>Operating System: Windows 10/11, Linux, or macOS</li>
+        <li>Java Development Kit (JDK): Version 8 or higher</li>
+        <li>IDE: Any Java IDE (IntelliJ IDEA, Eclipse, NetBeans) - Optional</li>
+    </ul>
+
+    <h2>4. OOP CONCEPTS USED</h2>
+    <table>
+        <tr><th>Concept</th><th>Implementation</th><th>Example in Project</th></tr>
+        <tr><td><strong>Abstraction</strong></td><td>Abstract class with abstract methods</td><td>Person.java - abstract getRole() method</td></tr>
+        <tr><td><strong>Inheritance</strong></td><td>Subclasses extending parent class</td><td>Patient, Doctor, Staff extend Person</td></tr>
+        <tr><td><strong>Encapsulation</strong></td><td>Private fields with getters/setters</td><td>All model classes use private fields</td></tr>
+        <tr><td><strong>Polymorphism</strong></td><td>Method overriding in subclasses</td><td>getRole() returns different values</td></tr>
+        <tr><td><strong>Composition</strong></td><td>Class contains object references</td><td>Bill contains BillItem objects</td></tr>
+        <tr><td><strong>Singleton</strong></td><td>Single instance pattern</td><td>HospitalManager.getInstance()</td></tr>
+    </table>
+</div>
+
+<!-- System Design -->
+<div class="page">
+    <h2>5. SYSTEM DESIGN</h2>
+    <h3>5.1 Class Hierarchy</h3>
+    <div class="code-block">
+Person (Abstract Class)
+├── Patient
+├── Doctor
+└── Staff
+
+HospitalManager (Singleton)
+├── PatientManager
+├── DoctorManager
+├── AppointmentManager
+├── BillingManager
+└── RoomManager
+    </div>
+
+    <h3>5.2 Project Structure</h3>
+    <div class="code-block">
+Hospital_Management_System/
+├── src/
+│   ├── Main.java
+│   ├── models/
+│   │   ├── Person.java (Abstract)
+│   │   ├── Patient.java
+│   │   ├── Doctor.java
+│   │   ├── Staff.java
+│   │   ├── Appointment.java
+│   │   ├── Bill.java
+│   │   ├── Room.java
+│   │   ├── Department.java
+│   │   └── MedicalRecord.java
+│   ├── managers/
+│   │   ├── HospitalManager.java
+│   │   ├── PatientManager.java
+│   │   ├── DoctorManager.java
+│   │   ├── AppointmentManager.java
+│   │   ├── BillingManager.java
+│   │   └── RoomManager.java
+│   ├── utils/
+│   │   ├── FileHandler.java
+│   │   ├── IDGenerator.java
+│   │   └── DateUtils.java
+│   └── gui/
+│       ├── HospitalManagementApp.java
+│       ├── LoginPanel.java
+│       ├── DashboardPanel.java
+│       ├── PatientPanel.java
+│       ├── DoctorPanel.java
+│       ├── AppointmentPanel.java
+│       ├── RoomPanel.java
+│       ├── BillingPanel.java
+│       └── components/
+│           ├── StyledButton.java
+│           ├── StyledTable.java
+│           ├── StyledTextField.java
+│           └── SidebarPanel.java
+└── data/ (auto-generated)
+    </div>
+</div>
+
+<!-- Implementation - Code -->
+<div class="page">
+    <h2>6. IMPLEMENTATION</h2>
+    <h3>6.1 Abstract Class - Person.java</h3>
+    <p>The Person class demonstrates <strong>Abstraction</strong> by defining common attributes for all person types and an abstract method that must be implemented by subclasses.</p>
+    <div class="code-block">
+package models;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+
+public abstract class Person implements Serializable {
+    
+    // Private fields - Encapsulation
+    private String id;
+    private String name;
+    private LocalDate dateOfBirth;
+    private String gender;
+    private String phone;
+    private String email;
+    private String address;
+    
+    // Abstract method - Abstraction
+    public abstract String getRole();
+    
+    // Getters and Setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    // ... more getters and setters
+}
+    </div>
+</div>
+
+<div class="page">
+    <h3>6.2 Inheritance - Patient.java</h3>
+    <p>The Patient class demonstrates <strong>Inheritance</strong> by extending Person and <strong>Polymorphism</strong> by overriding the getRole() method.</p>
+    <div class="code-block">
+package models;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Patient extends Person {
+    
+    private String patientId;
+    private String bloodGroup;
+    private LocalDate admissionDate;
+    private List&lt;String&gt; medicalHistory;
+    private String assignedDoctorId;
+    private String roomNumber;
+    private boolean isAdmitted;
+    
+    // Polymorphism - Different implementation
+    @Override
+    public String getRole() {
+        return "Patient";
+    }
+    
+    public void admit(String roomNumber, String doctorId) {
+        this.isAdmitted = true;
+        this.roomNumber = roomNumber;
+        this.assignedDoctorId = doctorId;
+        this.admissionDate = LocalDate.now();
+    }
+    
+    public void discharge() {
+        this.isAdmitted = false;
+        this.roomNumber = null;
+    }
+}
+    </div>
+</div>
+
+<div class="page">
+    <h3>6.3 Singleton Pattern - HospitalManager.java</h3>
+    <p>The HospitalManager class implements the <strong>Singleton Design Pattern</strong> ensuring only one instance manages the entire system.</p>
+    <div class="code-block">
+package managers;
+
+public class HospitalManager {
+    
+    // Single instance
+    private static HospitalManager instance;
+    
+    // Sub-managers
+    private PatientManager patientManager;
+    private DoctorManager doctorManager;
+    private AppointmentManager appointmentManager;
+    private BillingManager billingManager;
+    private RoomManager roomManager;
+    
+    // Private constructor
+    private HospitalManager() {
+        initializeManagers();
+    }
+    
+    // Synchronized getInstance method
+    public static synchronized HospitalManager getInstance() {
+        if (instance == null) {
+            instance = new HospitalManager();
+        }
+        return instance;
+    }
+    
+    private void initializeManagers() {
+        this.patientManager = new PatientManager();
+        this.doctorManager = new DoctorManager();
+        this.appointmentManager = new AppointmentManager();
+        this.billingManager = new BillingManager();
+        this.roomManager = new RoomManager();
+    }
+}
+    </div>
+</div>
+
+<div class="page">
+    <h3>6.4 Composition - Bill.java</h3>
+    <p>The Bill class demonstrates <strong>Composition</strong> by containing a list of BillItem objects.</p>
+    <div class="code-block">
+package models;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Bill implements Serializable {
+    
+    private String billId;
+    private String patientId;
+    private List&lt;BillItem&gt; items;  // Composition
+    private double totalAmount;
+    private BillStatus status;
+    
+    // Nested class
+    public static class BillItem implements Serializable {
+        private String description;
+        private int quantity;
+        private double unitPrice;
+        private double amount;
+        
+        public BillItem(String desc, String cat, int qty, double price) {
+            this.description = desc;
+            this.quantity = qty;
+            this.unitPrice = price;
+            this.amount = qty * price;
+        }
+    }
+    
+    public void addItem(BillItem item) {
+        items.add(item);
+        calculateTotal();
+    }
+    
+    public void calculateTotal() {
+        totalAmount = items.stream()
+            .mapToDouble(BillItem::getAmount).sum();
+    }
+}
+    </div>
+</div>
+
+<!-- Screenshots -->
+<div class="page">
+    <h2>7. SCREENSHOTS</h2>
+    <h3>7.1 Login Screen</h3>
+    <p>The login screen provides role-based authentication with a clean, modern interface.</p>
+    <img src="screenshots/login_screen_1768126546614.png" class="screenshot" alt="Login Screen">
+    <p class="caption">Figure 1: Hospital Management System Login Screen</p>
+</div>
+
+<div class="page">
+    <h3>7.2 Dashboard</h3>
+    <p>The dashboard displays real-time statistics including patient count, doctor count, appointments, room availability, and revenue.</p>
+    <img src="screenshots/dashboard_screen_1768126568220.png" class="screenshot" alt="Dashboard">
+    <p class="caption">Figure 2: System Dashboard with Statistics</p>
+</div>
+
+<div class="page">
+    <h3>7.3 Patient Management</h3>
+    <p>The patient panel allows adding, viewing, editing, and deleting patient records with search functionality.</p>
+    <img src="screenshots/patients_screen_1768126589838.png" class="screenshot" alt="Patients">
+    <p class="caption">Figure 3: Patient Management Interface</p>
+</div>
+
+<div class="page">
+    <h3>7.4 Doctor Management</h3>
+    <p>The doctor panel displays all doctors with their specializations, departments, and consultation fees.</p>
+    <img src="screenshots/doctors_screen_1768126611501.png" class="screenshot" alt="Doctors">
+    <p class="caption">Figure 4: Doctor Management Interface</p>
+</div>
+
+<div class="page">
+    <h3>7.5 Room Management</h3>
+    <p>The room panel shows a visual grid of all rooms organized by floor with color-coded status indicators.</p>
+    <img src="screenshots/rooms_screen_1768126654313.png" class="screenshot" alt="Rooms">
+    <p class="caption">Figure 5: Room Management with Visual Grid</p>
+</div>
+
+<div class="page">
+    <h3>7.6 Appointment Scheduling</h3>
+    <p>The appointment panel enables scheduling, viewing, and managing patient appointments.</p>
+    <img src="screenshots/appointments_screen_1768126694740.png" class="screenshot" alt="Appointments">
+    <p class="caption">Figure 6: Appointment Scheduling Interface</p>
+</div>
+
+<div class="page">
+    <h3>7.7 Billing System</h3>
+    <p>The billing panel allows generating bills, adding items, and processing payments.</p>
+    <img src="screenshots/billing_screen_1768126672677.png" class="screenshot" alt="Billing">
+    <p class="caption">Figure 7: Billing Management Interface</p>
+</div>
+
+<!-- Conclusion -->
+<div class="page">
+    <h2>8. CONCLUSION</h2>
+    <p>The Hospital Management System project successfully demonstrates the practical implementation of Object-Oriented Programming concepts in Java. Through this project, we have:</p>
+    <ul>
+        <li>Implemented <strong>Abstraction</strong> using the abstract Person class with abstract methods</li>
+        <li>Demonstrated <strong>Inheritance</strong> through Patient, Doctor, and Staff classes extending Person</li>
+        <li>Applied <strong>Encapsulation</strong> by using private fields with public getters and setters</li>
+        <li>Showcased <strong>Polymorphism</strong> through method overriding in subclasses</li>
+        <li>Utilized <strong>Composition</strong> in the Bill class containing BillItem objects</li>
+        <li>Implemented the <strong>Singleton Pattern</strong> in HospitalManager</li>
+    </ul>
+    <p>The project provides a functional hospital management solution with features for managing patients, doctors, appointments, rooms, and billing through an intuitive graphical user interface.</p>
+    <h3>Future Enhancements</h3>
+    <ul>
+        <li>Database integration for persistent storage</li>
+        <li>Report generation and printing functionality</li>
+        <li>Multi-user authentication system</li>
+        <li>Integration with external medical systems</li>
+    </ul>
+
+    <h2>9. REFERENCES</h2>
+    <ol>
+        <li>Herbert Schildt, "Java: The Complete Reference", 11th Edition, McGraw-Hill Education</li>
+        <li>Oracle Java Documentation - https://docs.oracle.com/javase/</li>
+        <li>Java Swing Tutorial - https://docs.oracle.com/javase/tutorial/uiswing/</li>
+        <li>Design Patterns: Elements of Reusable Object-Oriented Software - Gang of Four</li>
+    </ol>
+</div>
+
+</body>
+</html>
